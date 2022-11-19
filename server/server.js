@@ -21,7 +21,12 @@ app.get('/', (request,response) => {
             Version:"0.0.0.1",
             Author: "dschouw"
         });
-})
+});
+
+app.get('/Heathrow', (request,response) => {
+    response.send(Heathrow);
+    });
+
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
