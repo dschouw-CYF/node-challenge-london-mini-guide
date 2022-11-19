@@ -23,8 +23,41 @@ app.get('/', (request,response) => {
         });
 });
 
-app.get('/Heathrow', (request,response) => {
-    response.send(Heathrow);
+function getCity(cityName) {
+    //uppercase the first letter of the city name
+
+    switch (cityName.toUpperCase()) {
+        case 'HARROW':
+            return Harrow;
+        case 'HEATHROW':
+            return Heathrow;
+        case 'STRATFORD':
+            return Statford;
+        default:
+            return null;
+    }
+}
+
+const validCategories = ['PHARMACIES', 'DOCTORS', 'COLLEGES', 'HOSPITALS'];
+
+app.get('/:city/:category', (request,response) => {
+    const city = getCity(request.params.city);
+    if (city)
+    {
+        const category = request.params.category.toUpperCase();
+        if (validCategories.includes(category))
+        {
+            response.send(city[category]);
+        }
+        else
+        {
+            response.status(404).send({Error: `Invalid Category ${category}`});
+        }
+    }
+    else {
+        response.status(404).send("City not found");
+    }
+
     });
 
 
