@@ -47,7 +47,7 @@ app.get('/:city/:category', (request,response) => {
         const category = request.params.category.toUpperCase();
         if (validCategories.includes(category))
         {
-            response.send(city[category]);
+            response.send(city[category.toLowerCase()]);
         }
         else
         {
